@@ -18,7 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:3000")
+// @CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://chat-appp-web-five.vercel.app"})
 public class ChatController {
 
     private final RoomRepository roomRepository;
