@@ -20,12 +20,19 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // server-side: @MessagingMapping("/chat")
         config.setUserDestinationPrefix("/user");
     }
+    // @Override
+    // public void registerStompEndpoints(StompEndpointRegistry registry) {
+    //     registry.addEndpoint("/chat")
+    //             .setAllowedOrigins("http://localhost:3000")
+    //             .withSockJS();
+    // }
+
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/chat")
-                .setAllowedOrigins("http://localhost:3000")
-                .withSockJS();
-    }
+public void registerStompEndpoints(StompEndpointRegistry registry) {
+    registry.addEndpoint("/chat")
+            .setAllowedOriginPatterns("*")   // ya allowedOrigins env variable se le lo
+            .withSockJS();
+}
     // /chat endpoint par connection apka establish hoga
 
 
