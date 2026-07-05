@@ -109,7 +109,7 @@ export default function HomePage() {
                       Join Room
                     </button>
                     <button
-                      onClick={() => router.push("/joinroom")}
+                      onClick={() => router.push("/joinroom?mode=create")}
                       className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 py-3.5 rounded-xl font-medium text-sm transition-all duration-200 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30"
                     >
                       <MdAdd size={18} />

@@ -14,8 +14,7 @@ import java.util.Map;
 public class BotController {
 
     @Autowired
-    private GroqService groqService; // GeminiService → GroqService
-
+    private GroqService groqService; 
     @PostMapping("/reply")
     public ResponseEntity<Map<String, String>> getReply(@RequestBody Map<String, String> request) {
         String userMessage = request.get("message");

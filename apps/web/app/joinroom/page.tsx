@@ -1,15 +1,25 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { MdLogin, MdVpnKey, MdArrowForward, MdChat } from "react-icons/md";
-
-export default function JoinRoomPage() {
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect, Suspense } from "react";
+import { MdLogin, MdVpnKey, MdArrowForward, MdChat, MdAdd } from "react-icons/md"
+function JoinRoomContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const mode = searchParams.get("mode");
+  const isCreateMode = mode === "create";
 
   const [name, setName] = useState("");
   const [roomId, setRoomId] = useState("");
   const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+    if (isCreateMode && !roomId) {
+      // Generate a random room ID like chat-1a2b
+      const randomId = "chat-" + Math.random().toString(36).substring(2, 6);
+      setRoomId(randomId);
+    }
+  }, [isCreateMode]);
 
   const handleJoinRoom = async () => {
     if (!name.trim() || !roomId.trim()) return;
@@ -40,9 +50,12 @@ export default function JoinRoomPage() {
                 <MdChat size={32} />
               </div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Join a Room
+               
+                 {isCreateMode ? "Create a Room" : "Join a Room"}
               </h1>
-              <p className="text-gray-500 text-sm mt-2">Enter your details to start chatting</p>
+              <p className="text-gray-500 text-sm mt-2">
+                {isCreateMode ? "Share your room ID with others" : "Enter your details to start chatting"}
+              </p>
             </div>
 
             {/* Inputs */}
@@ -73,7 +86,7 @@ export default function JoinRoomPage() {
                   <MdVpnKey className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-400 transition-colors" size={20} />
                   <input
                     type="text"
-                    placeholder="Enter room ID"
+                    placeholder={isCreateMode ? "Generated room ID" : "Enter room ID"}
                     value={roomId}
                     onChange={(e) => setRoomId(e.target.value)}
                     className="w-full bg-white/[0.05] border border-white/[0.08] rounded-xl py-3.5 pl-12 pr-4 text-sm placeholder-gray-500 outline-none focus:border-blue-500/50 focus:bg-white/[0.07] transition-all duration-200"
@@ -93,11 +106,11 @@ export default function JoinRoomPage() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
-                    Joining...
+                    {isCreateMode ? "Creating..." : "Joining..."}
+                     
                   </>
                 ) : (
                   <>
-                    Join Room
                     <MdArrowForward size={18} />
                   </>
                 )}
@@ -115,5 +128,12 @@ export default function JoinRoomPage() {
         </div>
       </div>
     </div>
+  );
+}
+  export default function JoinRoomPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#0a0a0f]" />}>
+      <JoinRoomContent />
+    </Suspense>
   );
 }

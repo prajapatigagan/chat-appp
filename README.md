@@ -1,3 +1,10 @@
+title: Chat App
+emoji: 💬
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
 # Turborepo starter
 
 This Turborepo starter is maintained by the Turborepo core team.

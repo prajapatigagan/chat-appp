@@ -151,7 +151,7 @@ const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     if (!roomId || !username || hasConnected.current) return;
     hasConnected.current = true;
 
-    const socket = new SockJS("${process.env.NEXT_PUBLIC_BACKEND_URL}chat");
+     const socket = new SockJS(`${process.env.NEXT_PUBLIC_BACKEND_URL || '/'}ws/chat`);
     const stomp = Stomp.over(socket);
     stomp.debug = () => {};
     let roomSubscription: any = null;

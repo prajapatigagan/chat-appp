@@ -21,7 +21,7 @@ export const connectSocket = (
   }
 
   stompClient = new Client({
-    webSocketFactory: () => new SockJS("${process.env.NEXT_PUBLIC_BACKEND_URL}chat"),
+      webSocketFactory: () => new SockJS(`${process.env.NEXT_PUBLIC_BACKEND_URL || '/'}ws/chat`),
     connectHeaders: {
       userId,
     },
