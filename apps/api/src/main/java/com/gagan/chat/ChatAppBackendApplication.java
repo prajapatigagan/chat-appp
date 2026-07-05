@@ -19,7 +19,7 @@ public class ChatAppBackendApplication {
     CommandLineRunner test() {
         return args -> {
             System.out.println("====================================");
-            System.out.println("MONGODB_URI = " + mongoUri);
+            // System.out.println("MONGODB_URI = " + mongoUri);
             System.out.println("====================================");
         };
     }

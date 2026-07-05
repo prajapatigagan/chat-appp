@@ -13,8 +13,10 @@ RUN mvn clean package -DskipTests
 FROM node:20-alpine AS frontend-build
 WORKDIR /app
 
-# Enable Corepack and pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Enable Corepack and pin pnpm to the exact version used to generate the lockfile
+# (must match "packageManager" in package.json — avoids lockfile/version mismatches
+# that "pnpm@latest" can cause later when a new major pnpm version ships)
+RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
 
 # Copy root workspace files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
@@ -23,7 +25,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY . .
 
 # Install dependencies and build frontend
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 RUN pnpm --filter web build
 
 # ==========================================
