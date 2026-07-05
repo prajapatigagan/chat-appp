@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-public class CorsConfig {
+public class Corsconfig {
 
     // Comma-separated list, e.g.:
     // ALLOWED_ORIGINS=https://chat-appp-web-five.vercel.app,http://localhost:3000
