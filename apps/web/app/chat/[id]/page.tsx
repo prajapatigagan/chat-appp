@@ -157,8 +157,10 @@ const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     // net::ERR_NAME_NOT_RESOLVED.
     // const wsBase = (process.env.NEXT_PUBLIC_BACKEND_URL || "").replace(/\/$/, "");
     // const socket = new SockJS(`${wsBase}/ws/chat`);
+
     const wsBase = (process.env.NEXT_PUBLIC_BACKEND_URL || "").replace(/\/$/, "");
     const socket = new SockJS(`${wsBase}/ws/chat`);
+    
     const stomp = Stomp.over(socket);
     stomp.debug = () => {};
     let roomSubscription: any = null;

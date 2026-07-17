@@ -50,7 +50,8 @@ public class FileUploadController {
             Files.copy(file.getInputStream(), filePath);
 
             // file url
-            String fileUrl ="${process.env.NEXT_PUBLIC_BACKEND_URL}uploads/" + fileName;
+            // String fileUrl ="${process.env.NEXT_PUBLIC_BACKEND_URL}uploads/" + fileName;
+            String fileUrl = "https://chat-app-k08c.onrender.com/uploads/" + fileName;
 
             return ResponseEntity.ok(fileUrl);
 
