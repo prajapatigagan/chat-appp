@@ -171,13 +171,13 @@ export const connectSocket = (
 };
 
 // ✅ Callback pehle register karo
-// Subscribe onConnect mein automatically hoga
+
 export const subscribeToStatus = (
   callback: (status: { userId: string; online: boolean }) => void
 ) => {
   statusCallback = callback;
 
-  // Agar already connected hai to turant subscribe karo
+
   if (stompClient?.connected) {
     stompClient.subscribe("/topic/status", (message) => {
       const status = JSON.parse(message.body);
