@@ -151,10 +151,12 @@ const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     if (!roomId || !username || hasConnected.current) return;
     hasConnected.current = true;
 
-    FIX: base URL trailing slash strip + explicit "/" before "ws/chat".
-    Old code (`${process.env.NEXT_PUBLIC_BACKEND_URL || '/'}ws/chat`) produced
-    "https://chat-app-k08c.onrender.comws/chat" — no slash — causing
-    net::ERR_NAME_NOT_RESOLVED.
+    // FIX: base URL trailing slash strip + explicit "/" before "ws/chat".
+    // Old code (`${process.env.NEXT_PUBLIC_BACKEND_URL || '/'}ws/chat`) produced
+    // "https://chat-app-k08c.onrender.comws/chat" — no slash — causing
+    // net::ERR_NAME_NOT_RESOLVED.
+    // const wsBase = (process.env.NEXT_PUBLIC_BACKEND_URL || "").replace(/\/$/, "");
+    // const socket = new SockJS(`${wsBase}/ws/chat`);
     const wsBase = (process.env.NEXT_PUBLIC_BACKEND_URL || "").replace(/\/$/, "");
     const socket = new SockJS(`${wsBase}/ws/chat`);
     const stomp = Stomp.over(socket);
