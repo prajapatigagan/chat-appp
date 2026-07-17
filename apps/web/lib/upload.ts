@@ -27,9 +27,6 @@ export const uploadFile = async (file: File) => {
 
   formData.append("file", file);
 
-  // FIX: was using "..." (double quotes) so ${...} never interpolated —
-  // the request URL was literally the string "${process.env...}api/files/upload".
-  // Must use backticks, plus a "/" before "api/files/upload".
   const response = await fetch(
     `${getApiBase()}/api/files/upload`,
     {
