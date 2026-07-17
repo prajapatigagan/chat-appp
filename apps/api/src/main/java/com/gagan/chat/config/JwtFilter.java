@@ -52,11 +52,7 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    // These paths are public (permitAll in SecurityConfig) — the JWT filter
-    // must never run on them. Without this, a stray/expired/invalid token
-    // sent by the frontend (e.g. a leftover Authorization header from a
-    // previous session) would block signup/login/websocket-connect before
-    // the request even reaches the controller.
+   
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getServletPath();
